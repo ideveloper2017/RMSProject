@@ -3,6 +3,7 @@ package uz.namangan.developer.rms.config;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
+import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.config.annotation.authentication.builders.AuthenticationManagerBuilder;
 import org.springframework.security.config.annotation.web.builders.HttpSecurity;
@@ -26,8 +27,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http
-                .authorizeRequests()
+        http.cors().and()
+                .csrf().disable()
+                .headers().frameOptions().sameOrigin();
+                http.authorizeRequests()
                 .antMatchers("/",
                         "/favicon.ico",
                         "/**/*.png",
@@ -44,8 +47,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/js/**",
                         "/images/**",
                         "/images/*.png").permitAll()
-                .anyRequest().authenticated().and()
-                .formLogin()
+                .antMatchers( "/api/v1/**").permitAll()
+                .antMatchers("/api/v1/auth/**").authenticated()
+                .antMatchers("/api/v1/menu/**").permitAll();
+
+
+              http.formLogin()
                 .loginPage("/login")
                 .permitAll().and()
                 .logout()
@@ -72,5 +79,11 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     @Override
     protected void configure(AuthenticationManagerBuilder auth) throws Exception {
         auth.authenticationProvider(authenticationProvider());
+    }
+
+    @Override
+    @Bean
+    public AuthenticationManager authenticationManagerBean() throws Exception {
+        return super.authenticationManagerBean();
     }
 }
