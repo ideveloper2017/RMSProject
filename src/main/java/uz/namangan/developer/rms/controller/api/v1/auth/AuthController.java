@@ -19,6 +19,7 @@ import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import uz.namangan.developer.rms.dto.LoginDto;
 import uz.namangan.developer.rms.model.user.Role;
+import uz.namangan.developer.rms.model.user.User;
 import uz.namangan.developer.rms.repository.RoleRepository;
 import uz.namangan.developer.rms.repository.UserRepository;
 import uz.namangan.developer.rms.security.JwtTokenProvider;
@@ -62,9 +63,14 @@ public class AuthController {
             SecurityContextHolder.getContext().setAuthentication(authentication);
             if (authentication.isAuthenticated()) {
                 String email = loginDto.getUsernameOrEmail();
-                jsonObject.put("name",authentication.getName());
+                User user=userRepository.findByUsernameOrEmail(loginDto.getUsernameOrEmail(),loginDto.getUsernameOrEmail());
+                jsonObject.put("firstName",user.getFirstName());
+                jsonObject.put("lastName",user.getLastName());
+                jsonObject.put("email",user.getLastName());
+                jsonObject.put("username",user.getUsername());
+                jsonObject.put("user_id",user.getId());
                 jsonObject.put("authorities",authentication.getAuthorities());
-                Iterator<Role> iterRole=userRepository.findByUsernameOrEmail(loginDto.getUsernameOrEmail(),loginDto.getUsernameOrEmail()).get().getRoles().iterator();
+                Iterator<Role> iterRole=user.getRoles().iterator();
                 Role role;
                 if (iterRole.hasNext()){
                     role=(Role) iterRole.next();

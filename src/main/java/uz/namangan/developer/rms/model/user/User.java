@@ -6,7 +6,7 @@ import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
-@Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
+@Table(name = "users",uniqueConstraints = @UniqueConstraint(columnNames = "email"))
 public class User extends DateAudit {
 
     @Id
@@ -15,17 +15,14 @@ public class User extends DateAudit {
     private String firstName;
     private String lastName;
     private String email;
-
     private String username;
     private String password;
-
     @Column(name = "is_login")
     private int isLogin;
-
     @Column(name = "is_Active")
     private int isActive;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
             name = "users_roles",
             joinColumns = @JoinColumn(
@@ -33,6 +30,10 @@ public class User extends DateAudit {
             inverseJoinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"))
     private Collection<Role> roles;
+
+    public void setRoles(Collection<Role> roles) {
+        this.roles = roles;
+    }
 
     public User() {
     }
@@ -118,10 +119,6 @@ public class User extends DateAudit {
 
     public Collection<Role> getRoles() {
         return roles;
-    }
-
-    public void setRoles(Collection<Role> roles) {
-        this.roles = roles;
     }
 
     @Override

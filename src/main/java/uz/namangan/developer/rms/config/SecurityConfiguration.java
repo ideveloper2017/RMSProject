@@ -54,12 +54,19 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
               http.formLogin()
                 .loginPage("/login")
-                .permitAll().and()
+                      .usernameParameter("usernameOrEmail")
+                      .passwordParameter("password")
+                .permitAll()
+                .failureUrl("/login?error=true")
+
+                      .permitAll()
+                      .and()
                 .logout()
                 .invalidateHttpSession(true)
                 .clearAuthentication(true)
-                .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
-                .logoutSuccessUrl("/login?logout")
+                      .logoutRequestMatcher(new AntPathRequestMatcher("/logout"))
+                      .logoutSuccessUrl("/login")
+                      .deleteCookies("JSESSIONID")
                 .permitAll();
     }
 

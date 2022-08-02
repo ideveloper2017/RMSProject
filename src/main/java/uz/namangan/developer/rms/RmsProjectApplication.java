@@ -45,13 +45,8 @@ public class RmsProjectApplication extends SpringBootServletInitializer implemen
 
 		Instant now = Instant.now();
 
-		Privilege readPrivilege	 = createPrivilegeIfNotFound("READ_PRIVILEGE");
-		Privilege writePrivilege = createPrivilegeIfNotFound("WRITE_PRIVILEGE");
 
-		List<Privilege> adminPrivileges = Arrays.asList(readPrivilege, writePrivilege);
 
-		createRoleIfNotFound("ROLE_ADMIN","Администратор", adminPrivileges);
-		createRoleIfNotFound("ROLE_USER","Пользователь", Arrays.asList(readPrivilege));
 
 		if (roleRepository.findAll().isEmpty()) {
 			Role adminRole = new Role();
@@ -69,6 +64,17 @@ public class RmsProjectApplication extends SpringBootServletInitializer implemen
 			roleRepository.save(userRole);
 		}
 
+
+		Privilege writePrivilege = createPrivilegeIfNotFound("WRITE_PRIVILEGE");
+		Privilege readPrivilege	 = createPrivilegeIfNotFound("READ_PRIVILEGE");
+
+		List<Privilege> adminPrivileges = Arrays.asList(readPrivilege, writePrivilege);
+
+		createRoleIfNotFound("ROLE_ADMIN","Администратор", adminPrivileges);
+		createRoleIfNotFound("ROLE_USER","Пользователь", Arrays.asList(readPrivilege));
+
+
+
 		if (userRepository.count()==0) {
 			User user = new User();
 			user.setFirstName("Parpiyev");
@@ -79,7 +85,7 @@ public class RmsProjectApplication extends SpringBootServletInitializer implemen
 			user.setIsActive(1);
 			user.setIsLogin(0);
 			Role roles = (Role) roleRepository.findByName("Администратор");
-//			user.setRoles(Arrays.asList(roles));
+			user.setRoles(Arrays.asList(roles));
 			user.setCreatedAt(now);
 			user.setUpdatedAt(now);
 			userRepository.save(user);
@@ -91,7 +97,7 @@ public class RmsProjectApplication extends SpringBootServletInitializer implemen
 	@Transactional
 	Role createRoleIfNotFound(String name,String title, Collection<Privilege> privileges) {
 		Instant now = Instant.now();
-		Role role = (Role) roleRepository.findByName(title);
+		Role role = (Role) roleRepository.findByRole(name);
 		if (role == null) {
 			role = new Role();
 			role.setName(title);

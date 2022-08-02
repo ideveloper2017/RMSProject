@@ -3,6 +3,7 @@ package uz.namangan.developer.rms.model.user;
 import uz.namangan.developer.rms.model.audit.DateAudit;
 import uz.namangan.developer.rms.model.permissions.Privilege;
 
+
 import javax.persistence.*;
 import java.util.Collection;
 
@@ -16,9 +17,9 @@ public class Role extends DateAudit {
 
     private String role;
 
-    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @ManyToMany(fetch = FetchType.EAGER)
     @JoinTable(
-            name = "roles_privileges",
+            name = "roles_permissions",
             joinColumns = @JoinColumn(
                     name = "role_id", referencedColumnName = "id"),
             inverseJoinColumns = @JoinColumn(

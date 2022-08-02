@@ -40,8 +40,8 @@ public class UserServiceImpl implements UserService<User> {
     }
 
     @Override
-    public User findByUsernameOrEmail(String value) {
-        return null;
+    public User findByUsernameOrEmail(String value){
+        return userRepository.findByUsernameOrEmail(value,value);
     }
 
     @Override
@@ -76,7 +76,7 @@ public class UserServiceImpl implements UserService<User> {
 
     @Override
     public UserDetails loadUserByUsername(String email) throws UsernameNotFoundException {
-        User user = userRepository.findByEmail(email);
+        User user = userRepository.findByUsernameOrEmail(email,email);
         if (user == null){
             throw new UsernameNotFoundException("Invalid username or password.");
         }

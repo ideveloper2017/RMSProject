@@ -4,7 +4,7 @@
     <persistence-units>
       <persistence-unit name="Default">
         <packages>
-          <package value="uz.namangan.developer.rms.RMSProject" />
+          <package value="uz.namangan.developer.rms" />
         </packages>
       </persistence-unit>
     </persistence-units>
