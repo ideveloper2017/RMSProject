@@ -46,7 +46,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/images/*.png").permitAll()
                 .anyRequest().authenticated().and()
                 .formLogin()
-//                .loginPage("/login")
+                .loginPage("/login")
                 .permitAll().and()
                 .logout()
                 .invalidateHttpSession(true)
