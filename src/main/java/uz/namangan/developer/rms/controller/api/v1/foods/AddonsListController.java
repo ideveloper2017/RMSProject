@@ -2,8 +2,9 @@ package uz.namangan.developer.rms.controller.api.v1.foods;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.developer.rms.model.food.AddonsList;
-import uz.developer.rms.service.AddonsListService;
+import uz.namangan.developer.rms.model.food.AddonsList;
+import uz.namangan.developer.rms.service.AddonsListService;
+
 
 import java.util.List;
 

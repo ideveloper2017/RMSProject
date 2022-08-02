@@ -5,11 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.developer.rms.dto.RestTableDto;
-import uz.developer.rms.model.table.RestTable;
-import uz.developer.rms.model.table.TableFloor;
-import uz.developer.rms.payload.ApiResponse;
-import uz.developer.rms.service.intarfaces.TablesService;
+import uz.namangan.developer.rms.dto.RestTableDto;
+import uz.namangan.developer.rms.model.table.RestTable;
+import uz.namangan.developer.rms.model.table.TableFloor;
+import uz.namangan.developer.rms.payload.ApiResponse;
+import uz.namangan.developer.rms.service.intarfaces.TablesService;
+
 
 import java.util.ArrayList;
 import java.util.List;

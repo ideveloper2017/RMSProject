@@ -3,10 +3,9 @@ package uz.namangan.developer.rms.controller.api.v1.foods;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
+import uz.namangan.developer.rms.model.food.FoodItem;
+import uz.namangan.developer.rms.service.FoodService;
 
-import uz.developer.rms.model.food.FoodItem;
-import uz.developer.rms.model.menu.MenuType;
-import uz.developer.rms.service.FoodService;
 
 import java.util.List;
 

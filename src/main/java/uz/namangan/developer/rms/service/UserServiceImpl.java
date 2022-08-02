@@ -2,24 +2,27 @@ package uz.namangan.developer.rms.service;
 
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
+import uz.namangan.developer.rms.dto.SignUpDto;
 import uz.namangan.developer.rms.model.user.Role;
 import uz.namangan.developer.rms.model.user.User;
 import uz.namangan.developer.rms.repository.UserRepository;
 import uz.namangan.developer.rms.security.UserPrincipal;
+import uz.namangan.developer.rms.service.intarfaces.UserService;
 
-import java.util.Arrays;
 import java.util.Collection;
+import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class UserServiceImpl implements UserService {
+public class UserServiceImpl implements UserService<User> {
 
     @Autowired
     private UserRepository userRepository;
@@ -29,6 +32,36 @@ public class UserServiceImpl implements UserService {
 
     public User findByEmail(String email){
         return userRepository.findByEmail(email);
+    }
+
+    @Override
+    public User save(SignUpDto register) {
+        return null;
+    }
+
+    @Override
+    public User findByUsernameOrEmail(String value) {
+        return null;
+    }
+
+    @Override
+    public List<User> getAllUserList() {
+        return null;
+    }
+
+    @Override
+    public Page<User> findAll(Pageable pageable, String searchText) {
+        return null;
+    }
+
+    @Override
+    public Page<User> findAll(Pageable pageable) {
+        return null;
+    }
+
+    @Override
+    public Optional<User> findById(Long id) {
+        return Optional.empty();
     }
 
 //    public User save(UserRegistrationDto registration){

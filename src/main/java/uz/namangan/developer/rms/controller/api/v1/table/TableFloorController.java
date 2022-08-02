@@ -5,14 +5,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.developer.rms.dto.TableFloorDto;
-import uz.developer.rms.model.products.Product;
-import uz.developer.rms.model.table.TableFloor;
-import uz.developer.rms.payload.ApiResponse;
-import uz.developer.rms.service.TableFloorServiceImpl;
-import uz.developer.rms.service.intarfaces.TableFloorService;
+import uz.namangan.developer.rms.dto.TableFloorDto;
+import uz.namangan.developer.rms.model.table.TableFloor;
+import uz.namangan.developer.rms.payload.ApiResponse;
+import uz.namangan.developer.rms.service.intarfaces.TableFloorService;
 
-import javax.ws.rs.Path;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;

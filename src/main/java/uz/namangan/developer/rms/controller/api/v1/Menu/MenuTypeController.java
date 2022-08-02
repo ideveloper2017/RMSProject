@@ -3,8 +3,9 @@ package uz.namangan.developer.rms.controller.api.v1.Menu;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.developer.rms.model.menu.MenuType;
-import uz.developer.rms.service.MenuTypeService;
+import uz.namangan.developer.rms.model.menu.MenuType;
+import uz.namangan.developer.rms.service.MenuTypeService;
+
 
 import java.util.List;
 

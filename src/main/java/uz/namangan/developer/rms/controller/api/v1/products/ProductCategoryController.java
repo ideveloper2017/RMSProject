@@ -2,8 +2,9 @@ package uz.namangan.developer.rms.controller.api.v1.products;
 
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.developer.rms.model.products.Product_category;
-import uz.developer.rms.service.ProductCategoryService;
+import uz.namangan.developer.rms.model.products.Product_category;
+import uz.namangan.developer.rms.service.ProductCategoryService;
+
 
 import java.util.List;
 

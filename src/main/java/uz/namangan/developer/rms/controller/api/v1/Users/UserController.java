@@ -8,10 +8,11 @@ import org.springframework.data.domain.Sort;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import uz.developer.rms.dto.SignUpDto;
-import uz.developer.rms.model.users.User;
-import uz.developer.rms.repository.UserRepository;
-import uz.developer.rms.service.intarfaces.UserService;
+import uz.namangan.developer.rms.dto.SignUpDto;
+import uz.namangan.developer.rms.model.user.User;
+import uz.namangan.developer.rms.repository.UserRepository;
+import uz.namangan.developer.rms.service.intarfaces.UserService;
+
 
 @RestController
 @RequestMapping("/api/v1/user")
@@ -24,7 +25,7 @@ public class UserController {
     private UserRepository userRepository;
 
     @GetMapping("/alluser/search/{searchText}")
-    public ResponseEntity<Page<User>>findAll(Pageable pageable,@PathVariable  String searchText){
+    public ResponseEntity<Page<User>>findAll(Pageable pageable, @PathVariable  String searchText){
         return new ResponseEntity<>(userService.findAll(pageable,searchText), HttpStatus.OK);
     }
 

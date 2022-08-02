@@ -10,22 +10,15 @@ import org.springframework.web.servlet.ModelAndView;
 @Controller
 public class LoginController {
 
-    @RequestMapping(value = {"/"},method = RequestMethod.GET)
-    public String home(){
-//        ModelAndView model = new ModelAndView();
-//        model.setViewName("index");
-        return "redirect:login";
-    }
-    @GetMapping( "/login")
-    public String login(Model model){
-        return "login";
+
+    @GetMapping("/")
+    public String root() {
+        return "index";
     }
 
-    @RequestMapping(value= {"/home"}, method=RequestMethod.GET)
-    public ModelAndView home2() {
-        ModelAndView model = new ModelAndView();
-        model.setViewName("index");
-        return model;
+    @GetMapping("/login")
+    public String login(Model model) {
+        return "login";
     }
 
 
