@@ -1,9 +1,13 @@
 package uz.namangan.developer.rms.model.user;
 
+import uz.namangan.developer.rms.model.audit.DateAudit;
+import uz.namangan.developer.rms.model.permissions.Privilege;
+
 import javax.persistence.*;
+import java.util.Collection;
 
 @Entity
-public class Role {
+public class Role extends DateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
@@ -11,6 +15,15 @@ public class Role {
     private String name;
 
     private String role;
+
+    @ManyToMany(fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JoinTable(
+            name = "roles_privileges",
+            joinColumns = @JoinColumn(
+                    name = "role_id", referencedColumnName = "id"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "privilege_id", referencedColumnName = "id"))
+    private Collection<Privilege> privileges;
 
     public Role() {
     }
@@ -41,6 +54,14 @@ public class Role {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public Collection<Privilege> getPrivileges() {
+        return privileges;
+    }
+
+    public void setPrivileges(Collection<Privilege> privileges) {
+        this.privileges = privileges;
     }
 
     @Override

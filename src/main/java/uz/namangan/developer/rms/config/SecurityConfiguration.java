@@ -20,8 +20,6 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     private UserService userService;
 
 
-
-
     @Override
     public void configure(WebSecurity web) throws Exception {
 
@@ -31,9 +29,25 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
     protected void configure(HttpSecurity http) throws Exception {
         http
                 .authorizeRequests()
+                .antMatchers("/",
+                        "/favicon.ico",
+                        "/**/*.png",
+                        "/**/*.gif",
+                        "/**/*.svg",
+                        "/**/*.jpg",
+                        "/**/*.html",
+                        "/**/*.css",
+                        "/**/*.js",
+                        "/resources/**",
+                        "/fonts/**",
+                        "/static/**",
+                        "/css/**",
+                        "/js/**",
+                        "/images/**",
+                        "/images/*.png").permitAll()
                 .anyRequest().authenticated().and()
                 .formLogin()
-//                .loginPage("/login")
+                .loginPage("/login")
                 .permitAll().and()
                 .logout()
                 .invalidateHttpSession(true)

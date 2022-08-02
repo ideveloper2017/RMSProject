@@ -1,11 +1,13 @@
 package uz.namangan.developer.rms.model.user;
 
+import uz.namangan.developer.rms.model.audit.DateAudit;
+
 import javax.persistence.*;
 import java.util.Collection;
 
 @Entity
 @Table(uniqueConstraints = @UniqueConstraint(columnNames = "email"))
-public class User {
+public class User extends DateAudit {
 
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
