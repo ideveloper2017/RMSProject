@@ -50,7 +50,7 @@
     <div class="row">
       <div class="col-12">
         <div class="login-card">
-          <form th:action="@{/login}" class="theme-form login-form" method="post">
+          <form th:action="@{/proccesslogin}" class="theme-form login-form" method="post" th:object="${login}">
             <div th:if="${param.error}">
               <div class="alert alert-danger">Invalid username or password.</div>
             </div>
