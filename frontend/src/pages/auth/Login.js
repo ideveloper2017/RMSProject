@@ -28,11 +28,7 @@ const Login = () => {
   const onFormSubmit = (formData) => {
     setLoading(true);
 
-
-
-        const  loginRequest=Object.assign({},formData.value())
-
-        login(loginRequest).then(response=>{
+        login({usernameOrEmail:formData.name,password:formData.passcode}).then(response=>{
           if (response) {
             localStorage.getItem(ACCESS_TOKEN,response.token)
             setTimeout(() => {
