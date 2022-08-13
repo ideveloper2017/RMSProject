@@ -28,9 +28,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
 
     @Override
     protected void configure(HttpSecurity http) throws Exception {
-        http.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .invalidSessionUrl("/login");
+
         http.cors().and()
                 .csrf().disable()
                 .headers().frameOptions().sameOrigin();
@@ -52,17 +50,20 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                         "/images/**",
                         "/images/*.png").permitAll()
                 .antMatchers( "/api/v1/**").permitAll()
-                .antMatchers("/api/v1/auth/**").authenticated()
-                .antMatchers("/api/v1/menu/**").permitAll();
+                .antMatchers("/api/v1/auth/**").permitAll()
+                .antMatchers("/api/v1/menu/**").permitAll()
+                        .anyRequest()
+                        .authenticated();
 
-
+        http.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .invalidSessionUrl("/login");
               http.formLogin()
                 .loginPage("/login")
                       .usernameParameter("usernameOrEmail")
                       .passwordParameter("password")
                 .permitAll()
                 .failureUrl("/login?error=true")
-
                       .permitAll()
                       .and()
                 .logout()
