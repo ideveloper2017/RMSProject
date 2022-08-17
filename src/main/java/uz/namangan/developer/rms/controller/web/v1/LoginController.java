@@ -78,11 +78,11 @@ public class LoginController {
 
     @PostMapping("/proccesslogin")
     public ModelAndView loginProccess(@ModelAttribute("login")   LoginDto loginDto){
-
+        System.out.println(loginDto.toString());
         ModelAndView modelAndView=new ModelAndView();
-
             Authentication authentication=authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsernameOrEmail(),loginDto.getPassword()));
             SecurityContextHolder.getContext().setAuthentication(authentication);
+            System.out.println(authentication.isAuthenticated());
             if (authentication.isAuthenticated()) {
                 String email = loginDto.getUsernameOrEmail();
                 User user=userRepository.findByUsernameOrEmail(loginDto.getUsernameOrEmail(),loginDto.getUsernameOrEmail());

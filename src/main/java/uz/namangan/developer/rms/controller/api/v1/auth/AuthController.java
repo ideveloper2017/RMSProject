@@ -30,6 +30,7 @@ import java.util.Iterator;
 
 @RestController
 @RequestMapping("/api/v1/auth")
+@CrossOrigin(origins="http://localhost:3000")
 public class AuthController {
 
     private static Logger log = LoggerFactory.getLogger(AuthController.class);
@@ -60,13 +61,14 @@ public class AuthController {
         JSONObject jsonObject=new JSONObject();
         try{
             Authentication authentication=authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(loginDto.getUsernameOrEmail(),loginDto.getPassword()));
+            System.out.println(authentication.isAuthenticated());
             SecurityContextHolder.getContext().setAuthentication(authentication);
             if (authentication.isAuthenticated()) {
                 String email = loginDto.getUsernameOrEmail();
                 User user=userRepository.findByUsernameOrEmail(loginDto.getUsernameOrEmail(),loginDto.getUsernameOrEmail());
                 jsonObject.put("firstName",user.getFirstName());
                 jsonObject.put("lastName",user.getLastName());
-                jsonObject.put("email",user.getLastName());
+                jsonObject.put("email",user.getEmail());
                 jsonObject.put("username",user.getUsername());
                 jsonObject.put("user_id",user.getId());
                 jsonObject.put("authorities",authentication.getAuthorities());
@@ -80,16 +82,16 @@ public class AuthController {
                     jsonObject.put("token", "");
                 }
             }
-            return new ResponseEntity<String>(jsonObject.toString(), HttpStatus.OK);
+
         } catch (JSONException e) {
             try {
                 jsonObject.put("exception",e.getMessage());
             } catch (JSONException ex) {
                 ex.printStackTrace();
             }
-            return new ResponseEntity<String>(jsonObject.toString(),HttpStatus.UNAUTHORIZED);
+          //  return new ResponseEntity<String>(jsonObject.toString(),HttpStatus.UNAUTHORIZED);
         }
-
+        return new ResponseEntity<String>(jsonObject.toString(), HttpStatus.OK);
     }
 
 

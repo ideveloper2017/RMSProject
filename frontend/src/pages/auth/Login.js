@@ -29,16 +29,14 @@ const Login = () => {
     setLoading(true);
 
         login({usernameOrEmail:formData.name,password:formData.passcode}).then(response=>{
+          console.log(response);
           if (response) {
             localStorage.getItem(ACCESS_TOKEN,response.token)
-            setTimeout(() => {
-              window.history.pushState(
-                  `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`,
-                  "auth-login",
-                  `${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`
-              );
-              window.location.reload();
-            }, 2000);
+            console.log(response)
+            // setTimeout(() => {
+            //   window.history.pushState(`${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`,"auth-login",`${process.env.PUBLIC_URL ? process.env.PUBLIC_URL : "/"}`);
+            //   window.location.reload();
+            // }, 2000);
           } else {
             setTimeout(() => {
               setError("Cannot login with credentials");

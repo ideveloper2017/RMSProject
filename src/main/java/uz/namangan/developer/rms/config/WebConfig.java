@@ -1,16 +1,22 @@
 package uz.namangan.developer.rms.config;
 
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.beans.factory.annotation.Value;
 import org.springframework.context.MessageSource;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.validation.Validator;
 import org.springframework.validation.beanvalidation.LocalValidatorFactoryBean;
+import org.springframework.web.servlet.config.annotation.CorsRegistry;
 import org.springframework.web.servlet.config.annotation.ViewControllerRegistry;
 import org.springframework.web.servlet.config.annotation.WebMvcConfigurer;
 import org.thymeleaf.extras.springsecurity5.dialect.SpringSecurityDialect;
 @Configuration
 public class WebConfig implements WebMvcConfigurer{
+
+    private final long MAX_AGE_SECS = 3600;
+    @Value("${app.cors.allowedOrigins}")
+    private String[] allowedOrigins;
 
     @Autowired
     private MessageSource messageSource;
@@ -23,6 +29,14 @@ public class WebConfig implements WebMvcConfigurer{
         //registry.addViewController("/home").setViewName("userhome");
         registry.addViewController("/admin/home").setViewName("adminhome");
         //registry.addViewController("/403").setViewName("403");
+    }
+
+   @Override
+    public void addCorsMappings(CorsRegistry registry) {
+        registry.addMapping("/**")
+                .allowedOrigins(allowedOrigins)
+                .allowedMethods("HEAD", "OPTIONS", "GET", "POST", "PUT", "PATCH", "DELETE")
+                .maxAge(MAX_AGE_SECS);
     }
 
 //    @Override

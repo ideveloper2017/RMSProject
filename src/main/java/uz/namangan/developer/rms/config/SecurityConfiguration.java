@@ -53,13 +53,12 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 .antMatchers("/api/v1/auth/**").permitAll()
                 .antMatchers("/api/v1/menu/**").permitAll()
                         .anyRequest()
-                        .authenticated();
+                        .authenticated();;
 
-        http.sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .invalidSessionUrl("/login");
+
+
               http.formLogin()
-                .loginPage("/login")
+                .loginPage("/proccesslogin")
                       .usernameParameter("usernameOrEmail")
                       .passwordParameter("password")
                 .permitAll()
@@ -73,6 +72,10 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                       .logoutSuccessUrl("/login")
                       .deleteCookies("JSESSIONID")
                 .permitAll();
+
+        http.sessionManagement()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
+                .invalidSessionUrl("/login");
     }
 
     @Bean
