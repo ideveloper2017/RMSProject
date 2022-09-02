@@ -15,9 +15,11 @@ import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.web.bind.annotation.*;
 import uz.namangan.developer.rms.dto.LoginDto;
+import uz.namangan.developer.rms.dto.PinCodeDto;
 import uz.namangan.developer.rms.model.user.Role;
 import uz.namangan.developer.rms.model.user.User;
 import uz.namangan.developer.rms.repository.RoleRepository;
@@ -54,7 +56,7 @@ public class AuthController {
     @Autowired
     private JwtTokenProvider tokenProvider;
 
-    @PostMapping(value = "/signin",produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(value = "/signin")
     public ResponseEntity<?>authenticateUser(@RequestBody LoginDto loginDto)  {
 
         log.info("UserResourceImpl : authenticate");
@@ -94,6 +96,16 @@ public class AuthController {
         return new ResponseEntity<String>(jsonObject.toString(), HttpStatus.OK);
     }
 
+    @PostMapping(value = "/signpincode")
+    public ResponseEntity<?>singInPincode(@RequestBody PinCodeDto pinCodeDto){
+        System.out.println(passwordEncoder.encode(pinCodeDto.getPincode()));
+        userService.findByPinCode(passwordEncoder.encode(pinCodeDto.getPincode()));
+
+//        $2a$10$FoQ2WRhOSTahowAijAIzqunIwYklVuuJLNhOUNtMRgsJsbLy7LsEW
+//        $2a$10$p71lRFzYlGmqcqOifLaJVOt35FAqJQ4XHADdPtlmdMEN2VdSDIwIm
+//        $2a$10$E3tuoAF.6VVlhqBR4x5AmOZadAcPuCOyMa0PhmsZmrC805A42dB0u
+        return ResponseEntity.ok(userService);
+    }
 
 
 

@@ -8,6 +8,7 @@ import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 import uz.namangan.developer.rms.dto.SignUpDto;
 import uz.namangan.developer.rms.model.user.Role;
@@ -62,6 +63,11 @@ public class UserServiceImpl implements UserService<User> {
     @Override
     public Optional<User> findById(Long id) {
         return Optional.empty();
+    }
+
+    @Override
+    public User findByPinCode(String pincode) {
+        return userRepository.findByPassword(pincode);
     }
 
 //    public User save(UserRegistrationDto registration){

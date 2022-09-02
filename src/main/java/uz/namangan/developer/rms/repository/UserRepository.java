@@ -13,9 +13,7 @@ import java.util.Optional;
 @Repository
 public interface UserRepository extends JpaRepository<User, Long> {
 	User findByEmail(String email);
-
-
-	//    @Query("select u from User u where u.isActive=1")
+	@Query("select u from User u where u.isActive=1")
 	User findByUsernameOrEmail(String username, String email);
 	User findByUsername(String username);
 
@@ -23,4 +21,7 @@ public interface UserRepository extends JpaRepository<User, Long> {
 	Boolean existsByEmail(String email);
 	@Query("FROM User u where u.firstName LIKE %:searchtext% or u.lastName LIKE %:searchtext% ")
 	Page<User> findAllUsers(Pageable pageable, @Param("searchtext") String searchtext);
+
+//	@Query("select u from User u where u.password=:password")
+	User findByPassword(String password);
 }

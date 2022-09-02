@@ -1,6 +1,8 @@
 package uz.namangan.developer.rms.dto;
 
-public class LoginDto {
+import java.io.Serializable;
+
+public class LoginDto implements Serializable {
     private String usernameOrEmail;
     private String password;
 

@@ -17,24 +17,28 @@ public class RestTable {
     @ManyToOne
     @JoinColumn(name="floorid")
     private TableFloor floor;
+
+    private int available;
     private int status;
     public RestTable() {
     }
 
-    public RestTable(String tablename, int personcapicity, String tableicon, TableFloor floor, int status) {
+    public RestTable(String tablename, int personcapicity, String tableicon, TableFloor floor,int available, int status) {
         this.tablename = tablename;
         this.personcapicity = personcapicity;
         this.tableicon = tableicon;
         this.floor = floor;
+        this.available=available;
         this.status = status;
     }
 
-    public RestTable(int id, String tablename, int personcapicity, String tableicon, TableFloor floor, int status) {
+    public RestTable(int id, String tablename, int personcapicity, String tableicon, TableFloor floor, int available, int status) {
         this.id = id;
         this.tablename = tablename;
         this.personcapicity = personcapicity;
         this.tableicon = tableicon;
         this.floor = floor;
+        this.available=available;
         this.status = status;
     }
 

@@ -33,12 +33,12 @@ public class TableController {
     @PostMapping("/addtable")
     public ResponseEntity<?> addTable(@RequestBody RestTableDto restTableDto) {
         if (tablesService.find(restTableDto.getTablename())) {
-            tablesService.update(new RestTable(restTableDto.getId(), restTableDto.getTablename(), restTableDto.getPersoncapicity(), restTableDto.getTableicon(), new TableFloor(restTableDto.getFloor()), restTableDto.getStatus()));
+            tablesService.update(new RestTable(restTableDto.getId(), restTableDto.getTablename(), restTableDto.getPersoncapicity(), restTableDto.getTableicon(), new TableFloor(restTableDto.getFloor()),0, restTableDto.getStatus()));
             message = "Muvaffaqiyatli uzgartirildi!!!";
             success = true;
         } else {
 
-            tablesService.save(new RestTable(restTableDto.getTablename(), restTableDto.getPersoncapicity(), restTableDto.getTableicon(), new TableFloor(restTableDto.getFloor()), restTableDto.getStatus()));
+            tablesService.save(new RestTable(restTableDto.getTablename(), restTableDto.getPersoncapicity(), restTableDto.getTableicon(), new TableFloor(restTableDto.getFloor()),0, restTableDto.getStatus()));
             message = "Muvaffaqiyatli qo'shildi!!!";
             success = true;
         }
@@ -51,12 +51,12 @@ public class TableController {
         for (int i = 0; i < restTableDto.size(); i++) {
             RestTableDto restTable = restTableDto.get(i);
             if (tablesService.find(restTable.getTablename())) {
-                tablesService.update(new RestTable(restTable.getId(), restTable.getTablename(), restTable.getPersoncapicity(), restTable.getTableicon(), new TableFloor(restTable.getFloor()), restTable.getStatus()));
+                tablesService.update(new RestTable(restTable.getId(), restTable.getTablename(), restTable.getPersoncapicity(), restTable.getTableicon(), new TableFloor(restTable.getFloor()),0, restTable.getStatus()));
                 message = "Muvaffaqiyatli uzgartirildi!!!";
                 success = true;
             } else {
 
-                tablesService.save(new RestTable(restTable.getTablename(), restTable.getPersoncapicity(), restTable.getTableicon(), new TableFloor(restTable.getFloor()), restTable.getStatus()));
+                tablesService.save(new RestTable(restTable.getTablename(), restTable.getPersoncapicity(), restTable.getTableicon(), new TableFloor(restTable.getFloor()),0, restTable.getStatus()));
                 message = "Muvaffaqiyatli qo'shildi!!!";
                 success = true;
             }
@@ -69,7 +69,7 @@ public class TableController {
     @PostMapping("/updatetable")
     public ResponseEntity<?> updateTable(@RequestBody RestTableDto restTableDto) {
         TableFloor tableFloor = new TableFloor(restTableDto.getFloor());
-        RestTable restTable = new RestTable(restTableDto.getId(), restTableDto.getTablename(), restTableDto.getPersoncapicity(), restTableDto.getTableicon(), tableFloor, restTableDto.getStatus());
+        RestTable restTable = new RestTable(restTableDto.getId(), restTableDto.getTablename(), restTableDto.getPersoncapicity(), restTableDto.getTableicon(), tableFloor,0, restTableDto.getStatus());
 
         if (tablesService.find(restTable).isPresent()) {
             tablesService.update(restTable);
@@ -84,7 +84,7 @@ public class TableController {
         for(int i=0;i<restTableDto.size();i++) {
             RestTableDto restTableDTO=restTableDto.get(i);
             TableFloor tableFloor = new TableFloor(restTableDTO.getFloor());
-            RestTable restTable = new RestTable(restTableDTO.getId(), restTableDTO.getTablename(), restTableDTO.getPersoncapicity(), restTableDTO.getTableicon(), tableFloor, restTableDTO.getStatus());
+            RestTable restTable = new RestTable(restTableDTO.getId(), restTableDTO.getTablename(), restTableDTO.getPersoncapicity(), restTableDTO.getTableicon(), tableFloor,0, restTableDTO.getStatus());
 
             if (tablesService.find(restTable).isPresent()) {
                 tablesService.update(restTable);

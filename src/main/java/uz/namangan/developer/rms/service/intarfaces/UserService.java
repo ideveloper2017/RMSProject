@@ -12,15 +12,14 @@ import java.util.Optional;
 
 public interface UserService<T> extends UserDetailsService {
 
-
-
     User findByEmail(String email);
-
     User save(SignUpDto register);
     User findByUsernameOrEmail(String value);
     List<T> getAllUserList();
     Page<T> findAll(Pageable pageable, String searchText);
     Page<T> findAll(Pageable pageable);
     Optional<T> findById(Long id);
+
+    User findByPinCode(String pincode);
 //    User save(UserRegistrationDto registration);
 }
