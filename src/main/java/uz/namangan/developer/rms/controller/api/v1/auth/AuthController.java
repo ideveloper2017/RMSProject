@@ -8,6 +8,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 
+import org.springframework.context.annotation.Bean;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
@@ -51,7 +52,6 @@ public class AuthController {
 
     @Autowired
     private UserService userService;
-
 
     @Autowired
     private JwtTokenProvider tokenProvider;
@@ -98,13 +98,17 @@ public class AuthController {
 
     @PostMapping(value = "/signpincode")
     public ResponseEntity<?>singInPincode(@RequestBody PinCodeDto pinCodeDto){
-        System.out.println(passwordEncoder.encode(pinCodeDto.getPincode()));
-        userService.findByPinCode(passwordEncoder.encode(pinCodeDto.getPincode()));
+
+
+        System.out.println(passwordEncoder.encode("19820208"));
+
+//        System.out.println(passwordEncoder.encode(pinCodeDto.getPincode()));
+//        userService.findByPinCode(passwordEncoder.encode(pinCodeDto.getPincode()));
 
 //        $2a$10$FoQ2WRhOSTahowAijAIzqunIwYklVuuJLNhOUNtMRgsJsbLy7LsEW
 //        $2a$10$p71lRFzYlGmqcqOifLaJVOt35FAqJQ4XHADdPtlmdMEN2VdSDIwIm
 //        $2a$10$E3tuoAF.6VVlhqBR4x5AmOZadAcPuCOyMa0PhmsZmrC805A42dB0u
-        return ResponseEntity.ok(userService);
+        return ResponseEntity.ok(passwordEncoder.encode("19820208"));
     }
 
 
